@@ -30,12 +30,12 @@ public class AuthenticationService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
 
-    public String register(User user) {
+    public ResponseEntity<?> register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (user.getRole() == null)
             user.setRole(Role.USER);
         userRepository.save(user);
-        return " Register Successfully .....! ";
+        return new ResponseEntity<String>(" Register successFully ......! ",HttpStatus.CREATED);
     }
 
     public ResponseEntity<?> login (Login login){
